@@ -87,7 +87,7 @@ const items = [{
 const itemTemplate = document.querySelector('#item-template');
 const shopItems = document.querySelector('#shop-items');
 
-function makeCard() {
+function makeCard(items) {
     items.forEach(function(item) {
         const cardTemplate = itemTemplate.content.cloneNode(true);
 
@@ -108,20 +108,20 @@ function makeCard() {
     });
 }
 
-makeCard();
+makeCard(items);
 
 const searchButton = document.querySelector('#search-btn');
 const searchInput = document.querySelector('#search-input');
 const nothingFound = document.querySelector('#nothing-found');
 
 searchButton.addEventListener('click', function() {
-    const userText = sendInput.value.trim().toLowerCase();
+    const userText = searchInput.value.trim().toLowerCase();
 
     shopItems.innerHTML = '';
 
     if (items.title.includes(userText)) {
         const filteredItems = items.filter(function(item) {
-            return item.textContent.toLowerCase().includes(searchText);
+            return item.textContent.toLowerCase().includes(userText);
         });
 
         shopItems.append(filteredItems);
