@@ -119,11 +119,19 @@ searchButton.addEventListener('click', function() {
 
     shopItems.innerHTML = '';
 
-    if (items.title.includes(userText)) {
+    if (items.includes(userText)) {
         const filteredItems = items.filter(function(item) {
-            return item.textContent.toLowerCase().includes(userText);
+            return item.title.toLowerCase().includes(userText);
         });
 
+        shopItems.append(filteredItems);
+    } else {
+        shopItems.innerHTML = '';
+        nothingFound.textContent = 'Ничего не найдено';
+    };
+
+    if (filteredItems.length > 0) {
+        makeCard(items);
         shopItems.append(filteredItems);
     } else {
         shopItems.innerHTML = '';
