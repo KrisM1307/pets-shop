@@ -117,24 +117,16 @@ const nothingFound = document.querySelector('#nothing-found');
 searchButton.addEventListener('click', function() {
     const userText = searchInput.value.trim().toLowerCase();
 
+    const filteredItems = items.filter(function(item) {
+        return item.title.toLowerCase().includes(userText);
+    });
+
     shopItems.innerHTML = '';
 
-    if (items.includes(userText)) {
-        const filteredItems = items.filter(function(item) {
-            return item.title.toLowerCase().includes(userText);
-        });
-
-        shopItems.append(filteredItems);
-    } else {
-        shopItems.innerHTML = '';
-        nothingFound.textContent = 'Ничего не найдено';
-    };
-
     if (filteredItems.length > 0) {
-        makeCard(items);
-        shopItems.append(filteredItems);
+        nothingFound.innerHTML = '';
+        makeCard(filteredItems);
     } else {
-        shopItems.innerHTML = '';
         nothingFound.textContent = 'Ничего не найдено';
     }
 });
